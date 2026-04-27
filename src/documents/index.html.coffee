@@ -16,6 +16,9 @@ aside '.app', ->
 			span '.link.link-page', ->
 				text 'Page'
 
+			span '.link.link-logout', ->
+				text 'Logout'
+
 		span '.right.show-page', ->
 			#span '.status', ->
 			#	'Changes saved at 10:41am'
