@@ -64,8 +64,8 @@ class App extends View
 			loggedInUser: currentUser
 			onlogin: (args...) ->
 				# ignore as we listen to post message
-			onlogout: ->
-				localStorage.setItem('currentUser', '')
+			onlogout: =>
+				@applyLogout()
 		)
 
 		# Login the user if we already have one
@@ -256,6 +256,15 @@ class App extends View
 		# Chain
 		@
 
+	applyLogout: ->
+		localStorage.removeItem('currentUser')
+		@currentSite = null
+		@currentFileCollection = null
+		@currentFile = null
+		@editView = null
+		@setAppMode('login')
+		@navigate('/')
+		@
 
 
 	# ---------------------------------
@@ -429,6 +438,9 @@ class App extends View
 					site: @currentSite
 					fileCollection: @currentFileCollection
 				})
+			when $target.hasClass('link-logout')
+				@applyLogout()
+				navigator.id?.logout?()
 
 		# Chain
 		@
